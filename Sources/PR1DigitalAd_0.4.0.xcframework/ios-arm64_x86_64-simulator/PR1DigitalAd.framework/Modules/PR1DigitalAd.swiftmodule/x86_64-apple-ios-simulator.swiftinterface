@@ -1,0 +1,45 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-experimental-feature OpaqueTypeErasure -enable-bare-slash-regex -module-name PR1DigitalAd
+import Foundation
+@_exported import PR1DigitalAd
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct DigitalAdInput {
+  public init(domain: Swift.String, apiKey: Swift.String, storeKey: Swift.String, viewMode: Swift.String, cartItems: [[Swift.String : Any]]? = nil, clippedCoupons: [[Swift.String : Any]]? = nil, environment: Swift.String = "PROD", onEventTriggered: ((PR1DigitalAd.ActionPayload) -> Swift.Void)? = nil, payloadJsonString: Swift.String? = nil)
+}
+extension PR1DigitalAd.DigitalAdInput : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct ActionPayload : Swift.Codable {
+  public var status: Swift.String
+  public var message: Swift.String
+  public var value: Any
+  public var actionContext: Swift.String
+  public var actionName: Swift.String
+  public var customData: Swift.String
+  public init(status: Swift.String? = nil, message: Swift.String? = nil, value: Any? = nil, actionContext: Swift.String? = nil, actionName: Swift.String? = nil, customData: Swift.String? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers public class DigitalAd : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  public init(containerView: UIKit.UIView, options: PR1DigitalAd.DigitalAdInput)
+  public func initiate(frame: UIKit.UIView, options: PR1DigitalAd.DigitalAdInput)
+  public func dispatch(payload: PR1DigitalAd.ActionPayload)
+  @objc deinit
+}
+extension PR1DigitalAd.DigitalAd : WebKit.WKNavigationDelegate, WebKit.WKScriptMessageHandler {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func webView(_ webView: WebKit.WKWebView, didStartProvisionalNavigation navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func webView(_ webView: WebKit.WKWebView, didFail navigation: WebKit.WKNavigation!, withError error: any Swift.Error)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+}
+extension PR1DigitalAd.DigitalAd : WebKit.WKUIDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func webView(_ webView: WebKit.WKWebView, createWebViewWith configuration: WebKit.WKWebViewConfiguration, for navigationAction: WebKit.WKNavigationAction, windowFeatures: WebKit.WKWindowFeatures) -> WebKit.WKWebView?
+  @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
+}
